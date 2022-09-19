@@ -8,7 +8,7 @@ class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   const TransactionList({required this.transactions, super.key});
 
-  Widget _renderAmount(double amount) {
+  Widget _renderAmount(ctx, double amount) {
     return Container(
         padding: const EdgeInsets.all(8),
         child: Text(
@@ -16,11 +16,11 @@ class TransactionList extends StatelessWidget {
           style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
-              color: Colors.green.shade800),
+              color: Theme.of(ctx).primaryColorDark),
         ));
   }
 
-  Widget _renderTitle(String title, DateTime date) {
+  Widget _renderTitle(BuildContext ctx, String title, DateTime date) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
       child: Column(
@@ -29,7 +29,7 @@ class TransactionList extends StatelessWidget {
           Text(
             title.toCapitalized(),
             style: TextStyle(
-              color: Colors.green.shade700,
+              color: Theme.of(ctx).primaryColor,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -61,16 +61,16 @@ class TransactionList extends StatelessWidget {
                         border: Border(
                             left: BorderSide(
                                 color: transactions[index].amount > 40
-                                    ? Colors.red.shade500
-                                    : Colors.green.shade500,
+                                    ? Theme.of(context).errorColor
+                                    : Theme.of(context).backgroundColor,
                                 width: 6.0))),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 8.0),
                       child: Row(
                         children: <Widget>[
-                          _renderAmount(transactions[index].amount),
-                          _renderTitle(transactions[index].title,
+                          _renderAmount(context, transactions[index].amount),
+                          _renderTitle(context, transactions[index].title,
                               transactions[index].date)
                         ],
                       ),

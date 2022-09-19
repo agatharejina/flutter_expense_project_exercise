@@ -10,8 +10,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Expense App',
+    return MaterialApp(
+      title: 'Personal Expense',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
       home: MyHomePage(),
     );
   }
@@ -60,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   PreferredSizeWidget _appBar() {
     return AppBar(
       title: const Text('Expense App'),
-      backgroundColor: const Color(0xff1D3A53),
+      // backgroundColor: const Color(0xff1D3A53),
       actions: [
         IconButton(
             onPressed: () => _startAddNewTransaction(context),
@@ -93,10 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _renderFloatingActionBtn() {
-    return FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xff1D3A53),
-        child: const Icon(Icons.add));
+    return FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add));
   }
 
   @override
