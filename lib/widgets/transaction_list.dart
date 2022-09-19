@@ -12,7 +12,7 @@ class TransactionList extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(8),
         child: Text(
-          '\$ $amount',
+          '\$${amount.toStringAsFixed(2)}',
           style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
@@ -47,11 +47,9 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 16.0),
-      height: 450,
-      child: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Column(
-            children: transactions.map((tx) {
+      height: MediaQuery.of(context).size.height,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
           return Card(
               margin: const EdgeInsets.all(8.0),
               child: ClipPath(
@@ -62,7 +60,7 @@ class TransactionList extends StatelessWidget {
                     decoration: BoxDecoration(
                         border: Border(
                             left: BorderSide(
-                                color: tx.amount > 40
+                                color: transactions[index].amount > 40
                                     ? Colors.red.shade500
                                     : Colors.green.shade500,
                                 width: 6.0))),
@@ -71,13 +69,15 @@ class TransactionList extends StatelessWidget {
                           vertical: 16.0, horizontal: 8.0),
                       child: Row(
                         children: <Widget>[
-                          _renderAmount(tx.amount),
-                          _renderTitle(tx.title, tx.date)
+                          _renderAmount(transactions[index].amount),
+                          _renderTitle(transactions[index].title,
+                              transactions[index].date)
                         ],
                       ),
                     )),
               ));
-        }).toList()),
+        },
+        itemCount: transactions.length,
       ),
     );
   }
