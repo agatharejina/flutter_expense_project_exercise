@@ -14,6 +14,12 @@ class MyApp extends StatelessWidget {
       title: 'Personal Expense',
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        fontFamily: 'Inter',
+        textTheme: ThemeData.light().textTheme.copyWith(
+            titleLarge: const TextStyle(
+                fontFamily: 'SourceSansPro', fontWeight: FontWeight.bold),
+            titleSmall:
+                const TextStyle(fontFamily: 'SourceSansPro', fontSize: 12)),
       ),
       home: MyHomePage(),
     );
